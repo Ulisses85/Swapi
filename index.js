@@ -7,7 +7,7 @@ const request = require('superagent');
 const {PORT, API} = require('./config');
 
 // importing controls for routes
-const {People, Planet} = require('./controllers');
+const {People, Planet, Films} = require('./controllers');
 
 //***********1 task- display array of people***********//
 app.get('/people', function (req, res, next) {
@@ -29,7 +29,20 @@ app.get('/people', function (req, res, next) {
       else {
         res.status(200).send(
           {Name: Planet.longestOrbital(planets.body).name, orbitalPeriod: Planet.longestOrbital(planets.body).orbital_period}
-        )};
+      )};
+    });
+  });
+
+  //***********task 3 directors and films ***********//
+
+  app.get('/films', function (req, res, next) {
+    request
+    .get(`${API}/films`)
+    .end((error, films) => {
+      if (error) console.log(error);
+      else {
+        res.status(200).send(Films.directors(films.body));
+      }
     });
   });
 
