@@ -50,4 +50,20 @@ describe('Test for the tasks', () => {
       done();
     });
   });
-});
+  //********TEST 4th task*************//
+  it('should return a object Luke Skywalker with vehicles property used by the character', (done) => {
+    request('http://localhost:3000')
+    .get('/vehicles')
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .end((err, res) => {
+      if (err) return done(err);
+      expect(res.body).to.be.an('object');
+      expect(res.body).to.have.key('name', 'vehicles');
+      expect(res.body.name).to.be.a('string');
+      expect(res.body.name).to.equal('Luke Skywalker');
+      expect(res.body.vehicles).to.be.an('array');
+      done();
+    });
+  });
+})
