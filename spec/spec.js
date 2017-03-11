@@ -20,7 +20,7 @@ describe('Test for the tasks', () => {
       done();
     });
   });
-  
+
   //********TEST 2nd task*************//
   it('should return the biggest planet\'s name and orbital period', (done) => {
     request('http://localhost:3000')
@@ -31,6 +31,22 @@ describe('Test for the tasks', () => {
       if (err) return done(err);
       expect(res.body).to.be.an('object');
       expect(res.body).to.have.key('Name', 'orbitalPeriod');
+      done();
+    });
+  });
+  //********TEST for the 3rd task*************//
+  it('return and array of directors with their films', (done) => {
+    request('http://localhost:3000')
+    .get('/films')
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .end((err, res) => {
+      if (err) return done(err);
+      expect(res.body).to.be.an('array');
+      expect(res.body.length).to.equal(4);
+      expect(res.body[0]).to.have.key('films', 'name');
+      expect(res.body[0].name).to.be.a('string');
+      expect(res.body[0].name).to.equal('George Lucas');
       done();
     });
   });
