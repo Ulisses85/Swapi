@@ -4,6 +4,7 @@
   "description": "Star wars API task",
   "main": "index.js",
   "scripts": {
+    "dev": "node index.js",
     "test": "mocha spec/spec.js"
   },
   "repository": {
