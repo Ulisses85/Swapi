@@ -20,4 +20,18 @@ describe('Test for the tasks', () => {
       done();
     });
   });
+  
+  //********TEST 2nd task*************//
+  it('should return the biggest planet\'s name and orbital period', (done) => {
+    request('http://localhost:3000')
+    .get('/planet')
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .end((err, res) => {
+      if (err) return done(err);
+      expect(res.body).to.be.an('object');
+      expect(res.body).to.have.key('Name', 'orbitalPeriod');
+      done();
+    });
+  });
 });
